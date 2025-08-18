@@ -23,6 +23,8 @@ void loop() {   // Se repite infinitamente
 }
 
 ```
+<img width="1145" height="765" alt="image" src="https://github.com/user-attachments/assets/b4ae4f6d-2dd2-4ccb-9d63-91cd10824590" />
+
 
 #### Ej 3: Control por Pulsador
 ```js
@@ -38,6 +40,7 @@ void loop() {
   }
 }
 ```
+<img width="907" height="778" alt="image" src="https://github.com/user-attachments/assets/11bea6a5-b37a-4dde-a784-d43045f0a943" />
 
 #### EJ 4: LED con Potenciómetro]
 ```js
@@ -51,3 +54,6 @@ void loop() {
 }
 
 ```
+
+<img width="796" height="751" alt="image" src="https://github.com/user-attachments/assets/10923710-49b5-406c-a07b-476ff7bb8409" />
+
