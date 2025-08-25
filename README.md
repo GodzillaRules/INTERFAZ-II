@@ -106,6 +106,6 @@ void loop() {
 }
 ```
 <img width="1108" height="680" alt="image" src="https://github.com/user-attachments/assets/ed948f6a-8d2a-4d70-96ea-29448029e6a8" />
-
+<img src="https://www.tinkercad.com/things/coooqWS0pqS-semaforo/editel?returnTo=https%3A%2F%2Fwww.tinkercad.com%2Fdashboard%2Fdesigns%2Fcircuits"/>
 
 
