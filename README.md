@@ -57,7 +57,7 @@ void loop() {
 
 <img width="796" height="751" alt="image" src="https://github.com/user-attachments/assets/10923710-49b5-406c-a07b-476ff7bb8409" />
 
-####EJ 5: SEMAFORO
+#### EJ 5: SEMAFORO
 ```js
 
 // C++ code - Semáforo Autos y Peatones
