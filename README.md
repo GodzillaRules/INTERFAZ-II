@@ -121,5 +121,66 @@ void loop() {
 <img width="1108" height="680" alt="image" src="https://github.com/user-attachments/assets/ed948f6a-8d2a-4d70-96ea-29448029e6a8" />
 
 
+#### EJ 6: Elipse Interactivo: controlar un circulo en Processing mediante un potenciometro conectado a un Arduino UNO.
+Código de Arduino:
+```js
+unsigned int ADCValue;
+void setup(){
+    Serial.begin(9600);
+}
+
+void loop(){
+
+ int val = analogRead(0);
+   val = map(val, 0, 300, 0, 255);
+    Serial.println(val);
+delay(50);
+}
 
 
+Código de Processing:
+
+import processing.serial.*;
+
+Serial myPort;  // Crear objeto de la clase Serial
+static String val;    // Datos recibidos desde el puerto serial
+int sensorVal = 0;
+
+void setup()
+{
+  background(0); 
+  //fullScreen(P3D);
+   size(1080, 720);
+   noStroke();
+  noFill();
+  String portName = "COM3";// Cambia el número (en este caso) para que coincida con el puerto correspondiente conectado a tu Arduino. 
+
+  //myPort = new Serial(this, "/dev/cu.usbmodem1101", 9600);
+  myPort = new Serial(this, Serial.list()[0], 9600);
+
+}
+
+void draw()
+{
+  if ( myPort.available() > 0) {  // Si hay datos disponibles,
+  val = myPort.readStringUntil('\n'); 
+  try {
+   sensorVal = Integer.valueOf(val.trim());
+  }
+  catch(Exception e) {
+  ;
+  }
+  println(sensorVal); // léelos y guárdalos en vals!
+  }  
+ //background(0);
+  // Escala el valor de mouseX de 0 a 640 a un rango entre 0 y 175
+  float c = map(sensorVal, 0, width, 0, 400);
+  // Escala el valor de mouseX de 0 a 640 a un rango entre 40 y 300
+  float d = map(sensorVal, 0, width, 40,500);
+  fill(255, c, 0);
+  ellipse(width/2, height/2, d, d);   
+}
+```
+<img width="1218" height="572" alt="image" src="https://github.com/user-attachments/assets/10bb68c0-1af1-451b-aaa6-e333c89d41c2" />
+
+<img width="1898" height="720" alt="image" src="https://github.com/user-attachments/assets/700306c2-850e-47d1-a771-677ef5eba25e" />
