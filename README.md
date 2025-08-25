@@ -1,6 +1,19 @@
 # INTERFAZ-II
 
 #### EJ 1: Hola mundo
+```js
+void setup() {
+  Serial.begin(9600); // Inicia la comunicación serie a 9600 bps
+  Serial.println("Hey, you. You're finally awake"); // Envía "Hey, you. You're finally awake" al monitor serial
+}
+
+void loop() {
+  // No es necesario poner nada en el loop para este ejemplo
+}
+```
+<img width="866" height="557" alt="image" src="https://github.com/user-attachments/assets/85fab06f-2a66-4d5c-bf90-55033f6a38d4" />
+<img width="249" height="100" alt="image" src="https://github.com/user-attachments/assets/db3a791f-b7ea-441f-8d9d-351bad31ac9a" />
+
 
 #### EJ 2: LED Intermitente (Blink)
 ```js
