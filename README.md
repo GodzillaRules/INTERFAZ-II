@@ -244,7 +244,11 @@ void draw()
 <img width="1218" height="572" alt="image" src="https://github.com/user-attachments/assets/10bb68c0-1af1-451b-aaa6-e333c89d41c2" />
 
 <img width="1898" height="720" alt="image" src="https://github.com/user-attachments/assets/700306c2-850e-47d1-a771-677ef5eba25e" />
+
+
+
 #### Boton con potenciometro
+
 ```js
 int buttonPin = 2;       // Pin del botón
 int potPin = A0;         // Pin del potenciómetro
