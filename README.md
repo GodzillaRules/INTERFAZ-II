@@ -120,6 +120,64 @@ void loop() {
 ```
 <img width="1108" height="680" alt="image" src="https://github.com/user-attachments/assets/ed948f6a-8d2a-4d70-96ea-29448029e6a8" />
 
+ #### A1: Semaforo con intermitente
+
+// Definición de pines
+int LED_1 = 6;  // Luz roja autos
+int LED_2 = 7;  // Luz amarilla autos
+int LED_3 = 8;  // Luz verde autos
+int LED_4 = 9;  // Luz verde peatones
+int LED_5 = 10; // Luz roja peatones
+
+void setup() {
+  // Configuramos todos los pines como salida
+  pinMode(LED_1, OUTPUT);
+  pinMode(LED_2, OUTPUT);
+  pinMode(LED_3, OUTPUT);
+  pinMode(LED_4, OUTPUT);
+  pinMode(LED_5, OUTPUT);
+}
+
+void loop() {
+  //  Fase 1: Autos en verde, peatones en rojo
+  digitalWrite(LED_1, LOW);   // Rojo autos apagado
+  digitalWrite(LED_2, LOW);   // Amarillo autos apagado
+  digitalWrite(LED_3, HIGH);  // Verde autos encendido
+  digitalWrite(LED_5, HIGH);  // Rojo peatones encendido
+  digitalWrite(LED_4, LOW);   // Verde peatones apagado
+  delay(5000); // 5 segundos
+
+  //  Fase 2: Amarillo autos, peatones siguen en rojo
+  digitalWrite(LED_3, LOW);   // Verde autos apagado
+  digitalWrite(LED_2, HIGH);  // Amarillo autos encendido
+  delay(2000); // 2 segundos
+  digitalWrite(LED_2, LOW);   // Amarillo autos apagado
+
+//  Fase 3: Rojo autos, verde peatones
+digitalWrite(LED_1, HIGH);  // Rojo autos encendido
+digitalWrite(LED_5, LOW);   // Rojo peatones apagado
+digitalWrite(LED_4, HIGH);  // Verde peatones encendido (fijo)
+delay(3000); // Encendido fijo por 3 segundos
+
+// Parpadear luz verde peatones por 2 segundos
+// Hacemos un bucle para parpadear durante 2 segundos
+unsigned long startTime = millis();  // Almacenamos el tiempo de inicio
+while (millis() - startTime < 2000) { // 2000 ms = 2 segundos
+    digitalWrite(LED_4, LOW);   // Apagar el LED
+    delay(250);                  // Esperar 250 ms
+    digitalWrite(LED_4, HIGH);  // Encender el LED
+    delay(250);                  // Esperar 250 ms
+}
+
+
+  //  Fase 4: Rojo autos, rojo peatones (tiempo intermedio)
+  digitalWrite(LED_4, LOW);   // Verde peatones apagado
+  digitalWrite(LED_5, HIGH);  // Rojo peatones encendido
+  delay(2000); // 2 segundos
+}
+<img width="1472" height="780" alt="image" src="https://github.com/user-attachments/assets/f7c64c19-e7be-45ef-bf90-6b96c7b8964a" />
+
+
 
 #### EJ 6: Elipse Interactivo: controlar un circulo en Processing mediante un potenciometro conectado a un Arduino UNO.
 Código de Arduino:
