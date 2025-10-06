@@ -329,8 +329,10 @@ class CircleData {
   }
 }
 ```
+```
+#### Ejercicio n°10 ejercicio a eleccion: Simon Dice
+```
 
-#### Ejercicio n°10 ejercicio a eleccion: Simon Dice 
 // Pines para los LEDs
 int ledVerde = 2;
 int ledAmarillo = 3;
