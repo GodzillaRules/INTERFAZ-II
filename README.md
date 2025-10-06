@@ -329,3 +329,321 @@ class CircleData {
   }
 }
 ```
+
+
+#### Ejercicio n°10 ejercicio a eleccion: Simon Dice 
+
+// Pines para los LEDs
+int ledVerde = 2;
+int ledAmarillo = 3;
+int ledRojo = 4;
+int ledAzul = 5;
+
+// Pin para el buzzer
+int buzzer = 6;
+
+// Pin para LED de estado
+int ledEstado = 13;
+
+// Variables del juego
+int secuencia[100];
+int nivel = 1;
+int velocidad = 500;
+bool juegoActivo = false;
+
+// Tonos para cada color
+int tonoVerde = 262;     // DO
+int tonoAmarillo = 294;  // RE
+int tonoRojo = 330;      // MI
+int tonoAzul = 349;      // FA
+
+void setup() {
+  // Configurar pines de LEDs como salida
+  pinMode(ledVerde, OUTPUT);
+  pinMode(ledAmarillo, OUTPUT);
+  pinMode(ledRojo, OUTPUT);
+  pinMode(ledAzul, OUTPUT);
+  pinMode(ledEstado, OUTPUT);
+  pinMode(buzzer, OUTPUT);
+  
+  // Iniciar comunicación serial
+  Serial.begin(9600);
+  
+  // Mostrar instrucciones
+  mostrarInstrucciones();
+  
+  // Inicializar semilla aleatoria
+  randomSeed(analogRead(0));
+  
+  // Secuencia de inicio
+  secuenciaInicio();
+}
+
+void loop() {
+  // Si el juego no está activo, esperar a que presionen 's' para empezar
+  if (!juegoActivo) {
+    if (Serial.available() > 0) {
+      char tecla = Serial.read();
+      if (tecla == 's' || tecla == 'S') {
+        iniciarJuego();
+      }
+    }
+    return;
+  }
+  
+  // Juego principal
+  jugarNivel();
+}
+
+void mostrarInstrucciones() {
+  Serial.println("🎮 SIMON DICE - CON MONITOR SERIAL 🎮");
+  Serial.println("======================================");
+  Serial.println("INSTRUCCIONES:");
+  Serial.println("1 - LED Verde   (DO)");
+  Serial.println("2 - LED Amarillo (RE)"); 
+  Serial.println("3 - LED Rojo    (MI)");
+  Serial.println("4 - LED Azul    (FA)");
+  Serial.println();
+  Serial.println("Presiona 's' para COMENZAR");
+  Serial.println("======================================");
+}
+
+void secuenciaInicio() {
+  Serial.println("Inicializando juego...");
+  
+  // Secuencia de bienvenida
+  for (int i = 0; i < 3; i++) {
+    digitalWrite(ledEstado, HIGH);
+    tone(buzzer, 523, 100); // DO agudo
+    delay(150);
+    digitalWrite(ledEstado, LOW);
+    delay(150);
+  }
+  
+  // Mostrar todos los colores disponibles
+  Serial.println("Colores disponibles:");
+  activarLedYTono(ledVerde, tonoVerde, 300);
+  Serial.println("1 - Verde (DO)");
+  activarLedYTono(ledAmarillo, tonoAmarillo, 300);
+  Serial.println("2 - Amarillo (RE)");
+  activarLedYTono(ledRojo, tonoRojo, 300);
+  Serial.println("3 - Rojo (MI)");
+  activarLedYTono(ledAzul, tonoAzul, 300);
+  Serial.println("4 - Azul (FA)");
+  
+  Serial.println("\n✅ Listo! Presiona 's' para comenzar");
+}
+
+void iniciarJuego() {
+  juegoActivo = true;
+  nivel = 1;
+  velocidad = 500;
+  
+  // Limpiar secuencia anterior
+  for (int i = 0; i < 100; i++) {
+    secuencia[i] = 0;
+  }
+  
+  Serial.println("\n🎯 ¡JUGANDO! 🎯");
+  Serial.println("================");
+  
+  // Indicar inicio del juego
+  for (int i = 0; i < 2; i++) {
+    digitalWrite(ledEstado, HIGH);
+    tone(buzzer, 784, 200); // SOL agudo
+    delay(250);
+    digitalWrite(ledEstado, LOW);
+    delay(250);
+  }
+  
+  delay(1000);
+}
+
+void jugarNivel() {
+  // Agregar nuevo color a la secuencia
+  secuencia[nivel - 1] = random(1, 5); // 1-4
+  
+  // Mostrar información del nivel
+  Serial.println();
+  Serial.print("🎲 NIVEL ");
+  Serial.println(nivel);
+  Serial.print("Secuencia: ");
+  
+  // Mostrar secuencia completa
+  digitalWrite(ledEstado, HIGH);
+  delay(500);
+  digitalWrite(ledEstado, LOW);
+  delay(500);
+  
+  for (int i = 0; i < nivel; i++) {
+    Serial.print(secuencia[i]);
+    Serial.print(" ");
+    mostrarColor(secuencia[i]);
+    delay(velocidad / 2);
+  }
+  
+  Serial.println();
+  Serial.println("⏰ Tu turno! Repite la secuencia...");
+  
+  // Leer respuesta del jugador
+  for (int i = 0; i < nivel; i++) {
+    int colorPresionado = esperarTecla();
+    
+    if (colorPresionado != secuencia[i]) {
+      gameOver();
+      return;
+    }
+    
+    // Feedback visual y sonoro correcto
+    activarLedYTono(obtenerLed(colorPresionado), obtenerTono(colorPresionado), 150);
+  }
+  
+  // Nivel completado
+  nivelCompletado();
+}
+
+int esperarTecla() {
+  while (true) {
+    if (Serial.available() > 0) {
+      char tecla = Serial.read();
+      
+      switch(tecla) {
+        case '1':
+          activarLedYTono(ledVerde, tonoVerde, 200);
+          Serial.print("✅ Verde ");
+          return 1;
+        case '2':
+          activarLedYTono(ledAmarillo, tonoAmarillo, 200);
+          Serial.print("✅ Amarillo ");
+          return 2;
+        case '3':
+          activarLedYTono(ledRojo, tonoRojo, 200);
+          Serial.print("✅ Rojo ");
+          return 3;
+        case '4':
+          activarLedYTono(ledAzul, tonoAzul, 200);
+          Serial.print("✅ Azul ");
+          return 4;
+        default:
+          Serial.println("❌ Tecla inválida! Usa 1,2,3,4");
+          break;
+      }
+    }
+    delay(10);
+  }
+}
+
+void mostrarColor(int color) {
+  switch (color) {
+    case 1: // Verde
+      activarLedYTono(ledVerde, tonoVerde, velocidad);
+      break;
+    case 2: // Amarillo
+      activarLedYTono(ledAmarillo, tonoAmarillo, velocidad);
+      break;
+    case 3: // Rojo
+      activarLedYTono(ledRojo, tonoRojo, velocidad);
+      break;
+    case 4: // Azul
+      activarLedYTono(ledAzul, tonoAzul, velocidad);
+      break;
+  }
+}
+
+void activarLedYTono(int led, int frecuencia, int duracion) {
+  digitalWrite(led, HIGH);
+  tone(buzzer, frecuencia, duracion);
+  delay(duracion);
+  digitalWrite(led, LOW);
+  delay(50);
+}
+
+int obtenerLed(int color) {
+  switch (color) {
+    case 1: return ledVerde;
+    case 2: return ledAmarillo;
+    case 3: return ledRojo;
+    case 4: return ledAzul;
+    default: return ledVerde;
+  }
+}
+
+int obtenerTono(int color) {
+  switch (color) {
+    case 1: return tonoVerde;
+    case 2: return tonoAmarillo;
+    case 3: return tonoRojo;
+    case 4: return tonoAzul;
+    default: return tonoVerde;
+  }
+}
+
+void nivelCompletado() {
+  // Aumentar dificultad
+  nivel++;
+  if (velocidad > 200) {
+    velocidad -= 20;
+  }
+  
+  // Celebrar nivel completado
+  Serial.println();
+  Serial.println("🎉 ¡NIVEL COMPLETADO!");
+  Serial.print("🔜 Siguiente nivel: ");
+  Serial.println(nivel);
+  Serial.print("⚡ Velocidad: ");
+  Serial.println(velocidad);
+  
+  for (int i = 0; i < 3; i++) {
+    digitalWrite(ledEstado, HIGH);
+    tone(buzzer, 659, 100); // MI agudo
+    delay(120);
+    digitalWrite(ledEstado, LOW);
+    delay(120);
+  }
+  
+  delay(1000);
+}
+
+void gameOver() {
+  juegoActivo = false;
+  
+  Serial.println();
+  Serial.println("💀 💀 💀 GAME OVER 💀 💀 💀");
+  Serial.print("🏆 Puntuación final: NIVEL ");
+  Serial.println(nivel - 1);
+  Serial.println("================================");
+  
+  // Secuencia de game over
+  for (int i = 0; i < 5; i++) {
+    digitalWrite(ledVerde, HIGH);
+    digitalWrite(ledAmarillo, HIGH);
+    digitalWrite(ledRojo, HIGH);
+    digitalWrite(ledAzul, HIGH);
+    tone(buzzer, 196, 300); // SOL grave
+    delay(300);
+    digitalWrite(ledVerde, LOW);
+    digitalWrite(ledAmarillo, LOW);
+    digitalWrite(ledRojo, LOW);
+    digitalWrite(ledAzul, LOW);
+    delay(200);
+  }
+  
+  // Mostrar puntuación final con parpadeos
+  Serial.print("⭐ Puntuación (parpadeos): ");
+  Serial.println(nivel - 1);
+  
+  for (int i = 0; i < nivel - 1; i++) {
+    digitalWrite(ledEstado, HIGH);
+    delay(400);
+    digitalWrite(ledEstado, LOW);
+    delay(400);
+  }
+  
+  Serial.println();
+  Serial.println("🔄 Presiona 's' para jugar otra vez");
+  Serial.println("====================================");
+  
+  delay(2000);
+}
+```
+<img width="752" height="731" alt="image" src="https://github.com/user-attachments/assets/418429b1-4b1d-4de0-96dd-dbe23453ee47" />
