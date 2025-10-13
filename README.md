@@ -1,6 +1,7 @@
 # INTERFAZ-II
 1.[Hola Mundo](#ej-1-hola-mundo) 
-2.[Led intermitente]
+2.[Led intermitente](#ej-2-led-intermitente-blink)
+
 ##### EJ 1: Hola mundo
 
 
