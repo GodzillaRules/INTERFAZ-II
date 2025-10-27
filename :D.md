@@ -30,6 +30,7 @@ void loop() {
 <img width="866" height="557" alt="image" src="https://github.com/user-attachments/assets/85fab06f-2a66-4d5c-bf90-55033f6a38d4" />
 <img width="249" height="100" alt="image" src="https://github.com/user-attachments/assets/db3a791f-b7ea-441f-8d9d-351bad31ac9a" />
 
+[Índice](https://github.com/GodzillaRules/INTERFAZ-II/blob/main/:D.md#%C3%ADndice)<br>
 
 #### EJ 2: LED Intermitente (Blink)
 ```js
@@ -53,7 +54,7 @@ void loop() {   // Se repite infinitamente
 
 ```
 <img width="1145" height="765" alt="image" src="https://github.com/user-attachments/assets/b4ae4f6d-2dd2-4ccb-9d63-91cd10824590" />
-
+[Índice](https://github.com/GodzillaRules/INTERFAZ-II/blob/main/:D.md#%C3%ADndice)<br>
 
 #### Ej 3: Control por Pulsador
 
@@ -72,7 +73,7 @@ void loop() {
 }
 ```
 <img width="907" height="778" alt="image" src="https://github.com/user-attachments/assets/11bea6a5-b37a-4dde-a784-d43045f0a943" />
-
+[Índice](https://github.com/GodzillaRules/INTERFAZ-II/blob/main/:D.md#%C3%ADndice)<br>
 #### EJ 4: LED con Potenciómetro]
 ```js
 void setup() {
@@ -87,7 +88,7 @@ void loop() {
 ```
 
 <img width="796" height="751" alt="image" src="https://github.com/user-attachments/assets/10923710-49b5-406c-a07b-476ff7bb8409" />
-
+[Índice](https://github.com/GodzillaRules/INTERFAZ-II/blob/main/:D.md#%C3%ADndice)<br>
 #### EJ 5: SEMAFORO
 
 ```
@@ -139,7 +140,7 @@ void loop() {
 }
 ```
 <img width="1108" height="680" alt="image" src="https://github.com/user-attachments/assets/ed948f6a-8d2a-4d70-96ea-29448029e6a8" />
-
+[Índice](https://github.com/GodzillaRules/INTERFAZ-II/blob/main/:D.md#%C3%ADndice)<br>
  #### A1: Semaforo con intermitente
 
 
@@ -200,7 +201,7 @@ while (millis() - startTime < 2000) { // 2000 ms = 2 segundos
 
 ```
 <img width="1472" height="780" alt="image" src="https://github.com/user-attachments/assets/f7c64c19-e7be-45ef-bf90-6b96c7b8964a" />
-
+[Índice](https://github.com/GodzillaRules/INTERFAZ-II/blob/main/:D.md#%C3%ADndice)<br>
 
 
 #### EJ 6: Elipse Interactivo: controlar un circulo en Processing mediante un potenciometro conectado a un Arduino UNO.
@@ -358,7 +359,7 @@ class CircleData {
   }
 
 ```
-
+[Índice](https://github.com/GodzillaRules/INTERFAZ-II/blob/main/:D.md#%C3%ADndice)<br>
 
 #### Ejercicio n°7 Pulsador + arduino + processing
 
@@ -422,7 +423,7 @@ void draw() {
   }
 }
 ```
-
+[Índice](https://github.com/GodzillaRules/INTERFAZ-II/blob/main/:D.md#%C3%ADndice)<br>
 
 
 #### Ejercicio n°8 Arduino + pulsador + potenciometro + processing
@@ -508,7 +509,7 @@ class CircleData {
   }
 
 ```
-
+[Índice](https://github.com/GodzillaRules/INTERFAZ-II/blob/main/:D.md#%C3%ADndice)<br>
 
 #### Ejercicio n°9 Botonera con sonidos/ funciones if + else
 
@@ -664,7 +665,7 @@ void playTrack(int index) {
 }
 <img width="467" height="617" alt="image" src="https://github.com/user-attachments/assets/db1f4143-b5d2-454e-b304-fa867f446338" />
 ```
-
+[Índice](https://github.com/GodzillaRules/INTERFAZ-II/blob/main/:D.md#%C3%ADndice)<br>
 
 #### Ejercicio n°10 ejercicio a eleccion: Simon Dice
 
@@ -989,4 +990,4 @@ void gameOver() {
 }
 ```
 <img width="464" height="616" alt="image" src="https://github.com/user-attachments/assets/71078c7d-4014-4c9a-a8f2-94f8211a56b8" />
-
+[Índice](https://github.com/GodzillaRules/INTERFAZ-II/blob/main/:D.md#%C3%ADndice)<br>
