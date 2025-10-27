@@ -5,7 +5,7 @@
 4.[Led con patenciometro](#ej-4-led-con-potenci%C3%B3metro)<br>
 5.[Semaforo](#ej-5-semaforo)<br>
 6.[Elipse Interactivo](#ej-6-elipse-interactivo-controlar-un-circulo-en-processing-mediante-un-potenciometro-conectado-a-un-arduino-uno)<br>
-7.[Pulsador + Arduino + Processing](#ejercicio-n7-pulsador--arduino--processing)<<br>
+7.[Pulsador + Arduino + Processing](#ejercicio-n7-pulsador--arduino--processing)<br>
 8.[Arduino + Pulsador + Potenciometro + Processing](#ejercicio-n8-arduino--pulsador--potenciometro--processing)<br>
 9.[Botonera con sonidos](#ejercicio-n9-botonera-con-sonidos-funciones-if--else)<br>
 10.[Simon Dice](#ejercicio-n10-ejercicio-a-eleccion-simon-dice)<br>
