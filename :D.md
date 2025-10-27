@@ -73,7 +73,9 @@ void loop() {
 }
 ```
 <img width="907" height="778" alt="image" src="https://github.com/user-attachments/assets/11bea6a5-b37a-4dde-a784-d43045f0a943" />
+
 [Índice](https://github.com/GodzillaRules/INTERFAZ-II/blob/main/:D.md#%C3%ADndice)<br>
+
 #### EJ 4: LED con Potenciómetro]
 ```js
 void setup() {
