@@ -5,6 +5,7 @@
 ##### EJ 1: Hola mundo
 
 
+```
 
 ```js
 void setup() {
@@ -45,6 +46,8 @@ void loop() {   // Se repite infinitamente
 
 
 #### Ej 3: Control por Pulsador
+
+```
 ```js
 void setup() {
   pinMode(2, INPUT);  // Botón como entrada
@@ -76,6 +79,8 @@ void loop() {
 <img width="796" height="751" alt="image" src="https://github.com/user-attachments/assets/10923710-49b5-406c-a07b-476ff7bb8409" />
 
 #### EJ 5: SEMAFORO
+
+```
 ```js
 
 // C++ code - Semáforo Autos y Peatones
@@ -127,6 +132,8 @@ void loop() {
 
  #### A1: Semaforo con intermitente
 
+
+```
 // Definición de pines
 int LED_1 = 6;  // Luz roja autos
 int LED_2 = 7;  // Luz amarilla autos
@@ -180,11 +187,15 @@ while (millis() - startTime < 2000) { // 2000 ms = 2 segundos
   digitalWrite(LED_5, HIGH);  // Rojo peatones encendido
   delay(2000); // 2 segundos
 }
+
+```
 <img width="1472" height="780" alt="image" src="https://github.com/user-attachments/assets/f7c64c19-e7be-45ef-bf90-6b96c7b8964a" />
 
 
 
 #### EJ 6: Elipse Interactivo: controlar un circulo en Processing mediante un potenciometro conectado a un Arduino UNO.
+
+```
 Código de Arduino:
 ```js
 unsigned int ADCValue;
@@ -254,6 +265,9 @@ void draw()
 
 #### Boton con potenciometro
 
+```
+
+
 ```js
 int buttonPin = 2;       // Pin del botón
 int potPin = A0;         // Pin del potenciómetro
@@ -274,7 +288,7 @@ void loop() {
     delay(200);               // debounce simple
   }
 }
-```
+
 processing:
 
 import processing.serial.*;
@@ -332,10 +346,13 @@ class CircleData {
     this.y = y;
     this.size = size;
   }
-}
+
 ```
-```
+
+
 #### Ejercicio n°7 Pulsador + arduino + processing
+
+```
 Codigo arduino: int buttonPin = 2;  // Pin del botón
 int buttonState = 0;
 
@@ -399,6 +416,8 @@ void draw() {
 
 ```
 #### Ejercicio n°8 Arduino + pulsador + potenciometro + processing
+
+```
 Codigo Arduino:
 int buttonPin = 2;       // Pin del botón
 int potPin = A0;         // Pin del potenciómetro
@@ -475,12 +494,15 @@ class CircleData {
     this.x = x;
     this.y = y;
     this.size = size;
+    
   }
-```
 
 ```
-}
+
+
 #### Ejercicio n°9 Botonera con sonidos/ funciones if + else
+
+```
 Codigo arduino:
 // --- Configuración de botones ---
 const int numButtons = 3;
@@ -631,12 +653,13 @@ void playTrack(int index) {
   currentTrack = index;
 }
 <img width="467" height="617" alt="image" src="https://github.com/user-attachments/assets/db1f4143-b5d2-454e-b304-fa867f446338" />
-
-
 ```
+
+
 #### Ejercicio n°10 ejercicio a eleccion: Simon Dice
-```
 
+
+```
 // Pines para los LEDs
 int ledVerde = 2;
 int ledAmarillo = 3;
@@ -955,4 +978,5 @@ void gameOver() {
   delay(2000);
 }
 ```
-<img width="752" height="731" alt="image" src="https://github.com/user-attachments/assets/418429b1-4b1d-4de0-96dd-dbe23453ee47" />
+<img width="464" height="616" alt="image" src="https://github.com/user-attachments/assets/71078c7d-4014-4c9a-a8f2-94f8211a56b8" />
+
