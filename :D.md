@@ -334,8 +334,8 @@ class CircleData {
   }
 }
 ```
-
-Ejercicio n°7 Pulsador + arduino + processing
+```
+#### Ejercicio n°7 Pulsador + arduino + processing
 Codigo arduino: int buttonPin = 2;  // Pin del botón
 int buttonState = 0;
 
