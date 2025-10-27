@@ -334,6 +334,7 @@ class CircleData {
   }
 }
 ```
+
 Ejercicio n°7 Pulsador + arduino + processing
 Codigo arduino: int buttonPin = 2;  // Pin del botón
 int buttonState = 0;
@@ -393,8 +394,11 @@ void draw() {
     }
   }
 }
+```
 
-Ejercicio n°8 Arduino + pulsador + potenciometro + processing
+
+```
+#### Ejercicio n°8 Arduino + pulsador + potenciometro + processing
 Codigo Arduino:
 int buttonPin = 2;       // Pin del botón
 int potPin = A0;         // Pin del potenciómetro
@@ -472,8 +476,11 @@ class CircleData {
     this.y = y;
     this.size = size;
   }
+```
+
+```
 }
-Ejercicio n°9 Botonera con sonidos/ funciones if + else
+#### Ejercicio n°9 Botonera con sonidos/ funciones if + else
 Codigo arduino:
 // --- Configuración de botones ---
 const int numButtons = 3;
@@ -623,7 +630,8 @@ void playTrack(int index) {
   // Actualizamos la variable para saber cuál es la pista activa
   currentTrack = index;
 }
-<img width="1346" height="806" alt="image" src="https://github.com/user-attachments/assets/d6a79f3a-37e8-4abb-8bed-670e114af7f1" />
+<img width="467" height="617" alt="image" src="https://github.com/user-attachments/assets/db1f4143-b5d2-454e-b304-fa867f446338" />
+
 
 ```
 #### Ejercicio n°10 ejercicio a eleccion: Simon Dice
