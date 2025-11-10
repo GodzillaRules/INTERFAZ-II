@@ -993,3 +993,219 @@ void gameOver() {
 ```
 <img width="464" height="616" alt="image" src="https://github.com/user-attachments/assets/71078c7d-4014-4c9a-a8f2-94f8211a56b8" />
 [Índice](https://github.com/GodzillaRules/INTERFAZ-II/blob/main/:D.md#%C3%ADndice)<br>
+
+
+#### Respiración Urbana
+
+```
+Código Arduino
+
+cpp
+const int trigPin = 9;
+const int echoPin = 10;
+const int ledPin = 13;
+
+long duration;
+int distance;
+int previousDistance = 0;
+
+void setup() {
+  pinMode(trigPin, OUTPUT);
+  pinMode(echoPin, INPUT);
+  pinMode(ledPin, OUTPUT);
+  Serial.begin(9600);
+}
+
+void loop() {
+  // Medir distancia con sensor ultrasónico
+  digitalWrite(trigPin, LOW);
+  delayMicroseconds(2);
+  digitalWrite(trigPin, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(trigPin, LOW);
+  
+  duration = pulseIn(echoPin, HIGH);
+  distance = duration * 0.034 / 2;
+  
+  // Filtrar lecturas erróneas
+  if (distance > 2 && distance < 400) {
+    // Enviar datos a Processing
+    Serial.println(distance);
+    
+    // Feedback visual con LED
+    if (distance < 50) {
+      digitalWrite(ledPin, HIGH);
+    } else {
+      digitalWrite(ledPin, LOW);
+    }
+  }
+  
+  delay(50); // Estabilidad en las lecturas
+}
+
+
+
+
+Código processing:
+import processing.sound.*;
+import processing.serial.*;
+
+SoundFile ambientSound;
+Serial myPort;
+
+float volume = 0;
+float targetVolume = 0;
+float smoothFactor = 0.1;
+float distance = 200;
+
+// Variables para visualización
+float pulse = 0;
+ArrayList<Wave> waves = new ArrayList<Wave>();
+color[] urbanColors = {#2C3E50, #E74C3C, #3498DB, #F39C12, #27AE60};
+
+void setup() {
+  size(1200, 800);
+  
+  // Cargar sonido ambiental (reemplaza con tu archivo)
+  ambientSound = new SoundFile(this, "urban.mp3");
+  ambientSound.loop();
+  ambientSound.amp(0.5);
+  
+  // Configurar puerto serial (ajusta el puerto)
+  String portName = Serial.list()[0];
+  myPort = new Serial(this, portName, 9600);
+  myPort.bufferUntil('\n');
+  
+  // Inicializar ondas de visualización
+  for (int i = 0; i < 5; i++) {
+    waves.add(new Wave(random(width), random(height), urbanColors[i]));
+  }
+}
+
+void draw() {
+  background(#1A1A1A);
+  
+  // Suavizar transiciones de volumen
+  volume = lerp(volume, targetVolume, smoothFactor);
+  ambientSound.amp(volume);
+  
+  // Visualización artística
+  drawUrbanBreath();
+  drawDataViz();
+  
+  // Info de interfaz
+  drawInterface();
+}
+
+void serialEvent(Serial myPort) {
+  String inString = myPort.readStringUntil('\n');
+  if (inString != null) {
+    inString = trim(inString);
+    try {
+      distance = float(inString);
+      
+      // Mapear distancia a volumen (inverso)
+      // Más cerca = más volumen
+      float rawVolume = map(distance, 5, 200, 1.0, 0.0);
+      targetVolume = constrain(rawVolume, 0, 1.0);
+      
+      pulse = map(distance, 5, 200, 1.0, 0.1);
+      
+    } catch (Exception e) {
+      println("Error parsing distance");
+    }
+  }
+}
+
+void drawUrbanBreath() {
+  pushMatrix();
+  translate(width/2, height/2);
+  
+  // Círculo central pulsante
+  noFill();
+  stroke(lerpColor(#E74C3C, #3498DB, volume));
+  strokeWeight(3);
+  ellipse(0, 0, 200 * pulse, 200 * pulse);
+  
+  // Ondas concéntricas
+  for (int i = 1; i <= 5; i++) {
+    float waveSize = 150 + (i * 60) + sin(frameCount * 0.05 + i) * 20;
+    float alpha = map(i, 1, 5, 150, 50);
+    stroke(255, alpha * volume);
+    strokeWeight(1);
+    noFill();
+    ellipse(0, 0, waveSize * pulse, waveSize * pulse);
+  }
+  
+  popMatrix();
+}
+
+void drawDataViz() {
+  // Actualizar y dibujar ondas
+  for (Wave w : waves) {
+    w.update(volume);
+    w.display();
+  }
+  
+  // Partículas de "respiración"
+  if (volume > 0.3) {
+    for (int i = 0; i < 2; i++) {
+      float angle = random(TWO_PI);
+      float radius = random(100, 300) * pulse;
+      float x = width/2 + cos(angle) * radius;
+      float y = height/2 + sin(angle) * radius;
+      
+      fill(255, 100 * volume);
+      noStroke();
+      ellipse(x, y, 3, 3);
+    }
+  }
+}
+
+void drawInterface() {
+  fill(255);
+  textAlign(LEFT);
+  text("RESPIRACIÓN URBANA", 30, 30);
+  text("Distancia: " + nf(distance, 0, 1) + " cm", 30, 50);
+  text("Volumen: " + nf(volume, 0, 2), 30, 70);
+  text("Acércate para intensificar la respiración urbana", 30, height - 30);
+  
+  // Barra de volumen visual
+  noFill();
+  stroke(255);
+  rect(30, 90, 200, 20);
+  fill(lerpColor(#27AE60, #E74C3C, volume));
+  noStroke();
+  rect(30, 90, 200 * volume, 20);
+}
+
+class Wave {
+  float x, y;
+  color waveColor;
+  float phase;
+  float speed;
+  float size;
+  
+  Wave(float x, float y, color c) {
+    this.x = x;
+    this.y = y;
+    this.waveColor = c;
+    this.phase = random(TWO_PI);
+    this.speed = random(0.01, 0.05);
+    this.size = random(50, 150);
+  }
+  
+  void update(float vol) {
+    phase += speed * (0.5 + vol);
+    size = 80 + sin(phase) * 40 * vol;
+  }
+  
+  void display() {
+    noFill();
+    stroke(red(waveColor), green(waveColor), blue(waveColor), 150 * volume);
+    strokeWeight(2);
+    ellipse(x, y, size, size);
+  }
+}
+
+``` 
