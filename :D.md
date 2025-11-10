@@ -992,10 +992,11 @@ void gameOver() {
 }
 ```
 <img width="464" height="616" alt="image" src="https://github.com/user-attachments/assets/71078c7d-4014-4c9a-a8f2-94f8211a56b8" />
+
 [Índice](https://github.com/GodzillaRules/INTERFAZ-II/blob/main/:D.md#%C3%ADndice)<br>
 
 
-#### Respiración Urbana
+### Respiración Urbana
 
 ```
 Código Arduino
