@@ -1210,3 +1210,4 @@ class Wave {
 }
 
 ``` 
+[Índice](#%C3%ADndice)<br>
